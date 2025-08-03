@@ -1,6 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import eslintPlugin from "vite-plugin-eslint";
+import svgr from "vite-plugin-svgr";
 
 /** CONFIGURATION OPTIONS START */
 
@@ -8,12 +9,12 @@ import eslintPlugin from "vite-plugin-eslint";
 
 const ESLINT_PLUGIN_OPTIONS = {
   cache: false,
-  exclude: ["node_modules", "dist"],
+  exclude: ["node_modules", "dist", "scripts"],
 };
 
 /** CONFIGURATION OPTIONS END */
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), eslintPlugin(ESLINT_PLUGIN_OPTIONS)],
+  plugins: [react(), eslintPlugin(ESLINT_PLUGIN_OPTIONS), svgr()],
 });
