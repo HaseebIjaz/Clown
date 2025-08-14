@@ -19,5 +19,21 @@ export default tseslint.config([
       ecmaVersion: 2020,
       globals: globals.browser,
     },
+    // Conventionally we use Plugins Arr(Array), however this is flat format and lets us do the listing in the object instead and agains each key of plugin lets us mention manually map the relevant plugin
+    // For example we could have achieced the same result with => plugins: ["import"] and it could have automatically imported "eslint-plugin-import against that, this is the new Flat Format and we should use that"
+
+    plugins: {
+      import: importPlugin,
+    },
+    settings: {
+      "import/resolver": {
+        typescript: {
+          project: "./tsconfig.json",
+        },
+      },
+    },
+    rules: {
+      "import/no-unresolved": "error",
+    },
   },
-])
+]);
