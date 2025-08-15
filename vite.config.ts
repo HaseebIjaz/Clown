@@ -27,4 +27,25 @@ export default defineConfig({
       },
     }),
   ],
+
+  //Server Config for Dev Server not Prod
+  //after vite build, it outputs plain static files (HTML, JS, CSS, assets). Vite is completely gone. It does not run a server in production, so it can’t send headers — it’s just files.
+  ///In prod → you need to configure the server that actually serves your built files (e.g., NGINX, Apache, Express, Fastify) to send those headers.
+  //They’re for security hardening — even in dev mode.
+  server: {
+    // "0.0.0.0" tells it to listen on all available network interfaces.
+    //So other devices on your network (e.g., your phone) can access your dev server.
+    //Example: If your PC IP is 192.168.1.20, you can open the site on your phone by going to it
+    host: "0.0.0.0",
+    port: 5173,
+    // those headers in your vite.config.js will only be applied in development mode. they dont get shipped to prod
+
+    //
+    headers: {
+      //Prevents the browser from trying to guess the file type (MIME sniffing).
+      "X-Content-Type-Options": "nosniff",
+      //Prevents the site from being embedded in an <iframe> on another domain.
+      "X-Frame-Options": "SAMEORIGIN",
+    },
+  },
 });
